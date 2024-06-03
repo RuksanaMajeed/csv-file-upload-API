@@ -1,16 +1,10 @@
-import express from "express";
-import {
-    SignUp,
-    Login,
-    userVerfication,
-    uploadController,
-} from "../Controllers/AuthController";
+const { SignUp, Login, userVerfication, uploadController } = require("../Controllers/AuthController");
+// const uploadController = require("../Controllers/UploadController")
 
-const router = express.Router();
+const router = require("express").Router();
 
 router.post("/signup", SignUp);
 router.post("/login", Login);
 router.post("/upload", uploadController)
 router.post('/', userVerfication)
-
-export default router;
+module.exports = router;

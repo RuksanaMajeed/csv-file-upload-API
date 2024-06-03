@@ -1,13 +1,12 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt"
-import multer from "multer";
-import path from "path";
-import User from "../Models/UserModel";
-import { createSecretToken } from "../Util/SecretToken";
-import csvProcessor from "../Queue/Queue";
+const jwt = require("jsonwebtoken");
+const User = require("../Models/UserModel");
+const { createSecretToken } = require("../Util/SecretToken");
+const bcrypt = require("bcrypt");
+const multer = require('multer');
+const csvProcessor = require('../Queue/Queue');
+const path = require('path');
 
-
-export const SignUp = async (req, res, next) => {
+module.exports.SignUp = async (req, res, next) => {
     try {
         const { email, password, username, createdAt } = req.body;
         const existingUser = await User.findOne({ email });
@@ -31,7 +30,7 @@ export const SignUp = async (req, res, next) => {
     }
 }
 
-export const Login = async (req, res, next) => {
+module.exports.Login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
@@ -59,7 +58,7 @@ export const Login = async (req, res, next) => {
     }
 }
 
-export const uploadController = async (req, res) => {
+module.exports.uploadController = async (req, res) => {
     const upload = multer({ dest: 'uploads/' });
 
     await upload.single('file');
@@ -78,7 +77,7 @@ export const uploadController = async (req, res) => {
     }
 }
 
-export const userVerfication = (req, res) => {
+module.exports.userVerfication = (req, res) => {
     const token = req.cookies.token;
     if (!token) {
         return res.json({ status: false })
@@ -94,7 +93,7 @@ export const userVerfication = (req, res) => {
     })
 }
 
-export const verifyToken = (req, res, next) => {
+module.exports.verifyToken = (req, res, next) => {
     const token = req.headers['x-access-token'];
     if (!token) return res.status(403).send({ message: 'No token provided.' });
 

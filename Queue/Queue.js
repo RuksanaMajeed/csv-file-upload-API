@@ -1,8 +1,7 @@
-import Bull from "bull";
-import csv from "csv-parser"
-import fs from "fs";
-import CsvData from "../Models/csvModel";
-
+const Bull = require('bull');
+const csv = require('csv-parser');
+const fs = require('fs');
+const CsvData = require('../Models/csvModel');
 const csvProcessor = new Bull('csvProcessor', {
   redis: {
     host: '127.0.0.1',

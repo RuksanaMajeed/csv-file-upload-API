@@ -12,4 +12,5 @@ router.post("/signup", SignUp);
 router.post("/login", Login);
 router.post("/upload", uploadController)
 router.post('/', userVerfication)
-module.exports = router;
+
+export default router;
